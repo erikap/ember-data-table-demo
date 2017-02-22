@@ -1,0 +1,24 @@
+prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix ns1:	<http://schema.org/>
+prefix ns2:	<http://mu.semte.ch/vocabularies/core/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/application> {
+    <http://mu.semte.ch/services/github/madnificent/book-service/books/58ADFFFFA2F1740009000001>	rdf:type	ns1:Book .
+    <http://mu.semte.ch/services/github/madnificent/book-service/books/58ADFFFFA2F1740009000001>	ns2:uuid	"58ADFFFFA2F1740009000001" ;
+	    ns1:headline	"The Hitchhiker's Guide to the Galaxy" ;
+	    ns1:isbn	"9788636505700" ;
+	    ns1:author	<http://mu.semte.ch/services/github/madnificent/book-service/authors/58AE02A9AF84930009000002> .
+    <http://mu.semte.ch/services/github/madnificent/book-service/books/58AE0133A2F1740009000002>	rdf:type	ns1:Book ;
+    	ns2:uuid	"58AE0133A2F1740009000002" ;
+    	ns1:headline	"Getting Things Done" ;
+    	ns1:isbn	"9780670899241" ;
+    	ns1:author	<http://mu.semte.ch/services/github/madnificent/book-service/authors/58AE0222AF84930009000001> .
+    <http://mu.semte.ch/services/github/madnificent/book-service/authors/58AE0222AF84930009000001>	rdf:type	ns1:Author ;
+    	ns2:uuid	"58AE0222AF84930009000001" ;
+    	ns1:name	"David Allen" .
+    <http://mu.semte.ch/services/github/madnificent/book-service/authors/58AE02A9AF84930009000002>	rdf:type	ns1:Author ;
+    	ns2:uuid	"58AE02A9AF84930009000002" ;
+    	ns1:name	"Douglas Adams" .
+  }
+}
