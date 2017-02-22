@@ -1,0 +1,31 @@
+<h2>My simple books table</h2>
+
+<div class="row main-content">
+  <div class="col s12 m4 l2 option-panel">
+    <h5>Parameters</h5>
+    <div class="options">
+      <div class="row">
+        <div class="col s6">Sorting</div>
+        <div class="col s6">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
+      </div>
+      <div class="row">
+        <div class="col s6">Page</div>
+        <div class="col s6">{{page}}</div>
+      </div>
+      <div class="row">
+        <div class="col s6">Search</div>
+        <div class="col s6">
+          {{input id="enableFilter" type="checkbox" class="materialize-selectable-item-input filled-in" checked=enableFilter}}
+          <label for="enableFilter"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m8 l10 table-example">
+    {{#if enableFilter}}
+      {{data-table content=model fields="title isbn" sort=sort page=page filter=filter}}
+    {{else}}
+      {{data-table content=model fields="title isbn" sort=sort page=page}}
+    {{/if}}
+  </div>
+</div>
