@@ -1,5 +1,12 @@
 $primary-color:  #e53935; /* red-darken-1 */
+$secondary-color: #e53935; /* red-darken-1 */
+
 @import "ember-data-table";
+
+.brand-logo {
+  font-weight: 500;
+  text-transform: uppercase;
+}
 
 .main-content {
   margin-top: 25px;
@@ -14,10 +21,6 @@ $primary-color:  #e53935; /* red-darken-1 */
   padding-top: 10px;
 }
 
-[type="checkbox"].filled-in:checked + label:after {
-  border: 2px solid #e53935;
-  background-color: #e53935;
-}
 
 .code-sample pre {
   border: 1px solid #ef9a9a;
