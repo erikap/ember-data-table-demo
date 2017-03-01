@@ -8,12 +8,16 @@ $secondary-color: #e53935; /* red-darken-1 */
   text-transform: uppercase;
 }
 
+nav ul a.no-hover:hover {
+  background-color: transparent;
+}
+
 .main-content {
   margin-top: 25px;
 }
 
 .col.table-example {
-  border-left: 2px solid #e53935;
+  border-right: 2px solid #e53935;
   padding-left: 20px;
 }
 

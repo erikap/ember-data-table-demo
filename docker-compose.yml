@@ -11,7 +11,7 @@ dispatcher:
   volumes:
     - ./backend/dispatcher:/config
 books:
-  image: madnificent/books-service:1.0.0
+  image: erikap/books-service:ember-data-table-example
   links:
     - db:database
 migrations:

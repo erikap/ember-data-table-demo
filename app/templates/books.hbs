@@ -1,8 +1,14 @@
-<h2>My simple books table</h2>
-
 <div class="row main-content">
+  <div class="col s12 m8 l10 table-example">
+    <h4>My simple books table</h4>
+    {{#if enableFilter}}
+      {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page filter=filter}}
+    {{else}}
+      {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page}}
+    {{/if}}
+  </div>
   <div class="col s12 m4 l2 option-panel">
-    <h5>Parameters</h5>
+    <h4>Parameters</h4>
     <div class="options">
       <div class="row">
         <div class="col s6">Sorting</div>
@@ -20,13 +26,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="col s12 m8 l10 table-example">
-    {{#if enableFilter}}
-      {{data-table content=model fields="title isbn" sort=sort page=page filter=filter}}
-    {{else}}
-      {{data-table content=model fields="title isbn" sort=sort page=page}}
-    {{/if}}
   </div>
 </div>
 
