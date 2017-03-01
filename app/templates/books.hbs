@@ -2,9 +2,9 @@
   <div class="col s12 m8 l10 table-example">
     <h4>My simple books table</h4>
     {{#if enableFilter}}
-      {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page filter=filter}}
+      {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page size=size filter=filter}}
     {{else}}
-      {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page}}
+      {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page size=size}}
     {{/if}}
   </div>
   <div class="col s12 m4 l2 option-panel">
@@ -15,8 +15,12 @@
         <div class="col s6">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
       </div>
       <div class="row">
-        <div class="col s6">Page</div>
+        <div class="col s6">Page number</div>
         <div class="col s6">{{page}}</div>
+      </div>
+      <div class="row">
+        <div class="col s6">Page size</div>
+        <div class="col s6">{{size}}</div>
       </div>
       <div class="row">
         <div class="col s6">Search</div>
