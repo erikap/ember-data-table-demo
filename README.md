@@ -1,5 +1,6 @@
 # Ember Data Table demo
-Demo application for the Ember Data Table addon
+Demo application for the [Ember Data Table addon](https://github.com/mu-semtech/ember-data-table).
+Live demo is available on https://ember-data-table.semte.ch.
 
 ## Running the application
 ```

@@ -1,3 +1,92 @@
-<h4>My advanced books table</h4>
+<div class="row main-content">
+  <div class="col s12 m8 l10 table-example">
+    <h4>My advanced books table</h4>
+    {{#if enableFilter}}
+      {{#data-table content=model sort=sort page=page size=size filter=filter lineNumbers=enableLineNumbers as |t|}}
+        {{#t.content as |c|}}
+          {{#c.header}}
+            {{th-sortable field='title' currentSorting=sort label='Title'}}
+            <th>Author</th>
+            {{th-sortable field='isbn' currentSorting=sort label='ISBN'}}
+            {{th-sortable field='genre' currentSorting=sort label='Genre'}}
+            {{th-sortable field='publicationDate' currentSorting=sort label='Published'}}
+            {{th-sortable field='language' currentSorting=sort label='Language'}}
+            <th># pages</th>
+          {{/c.header}}
+          {{#c.body as |row|}}
+            <td>{{row.title}}</td>
+            <td>{{join ", " (map-by "name" row.authors)}}</td>
+            <td><a href="https://www.google.be/#q=isbn:+{{row.isbn}}&*">{{row.isbn}}</a></td>
+            <td>{{row.genre}}</td>
+            <td>{{moment-format row.publicationDate 'MM/DD/YYYY'}}</td>
+            <td>{{row.language}}</td>
+            <td>{{row.numberOfPages}}</td>
+          {{/c.body}}
+        {{/t.content}}
+      {{/data-table}}
+    {{else}}
+      {{#data-table content=model sort=sort page=page size=size lineNumbers=enableLineNumbers as |t|}}
+        {{#t.content as |c|}}
+          {{#c.header}}
+            {{th-sortable field='title' currentSorting=sort label='Title'}}
+            <th>Author</th>
+            {{th-sortable field='isbn' currentSorting=sort label='ISBN'}}
+            {{th-sortable field='genre' currentSorting=sort label='Genre'}}
+            {{th-sortable field='publicationDate' currentSorting=sort label='Published'}}
+            {{th-sortable field='language' currentSorting=sort label='Language'}}
+            <th># pages</th>
+          {{/c.header}}
+          {{#c.body as |row|}}
+            <td>{{row.title}}</td>
+            <td>{{map-by "name" row.authors}}</td>
+            <td><a href="https://www.google.be/#q=isbn:+{{row.isbn}}&*">{{row.isbn}}</a></td>
+            <td>{{row.genre}}</td>
+            <td>{{moment-format row.publicationDate 'MM/DD/YYYY'}}</td>
+            <td>{{row.language}}</td>
+            <td>{{row.numberOfPages}}</td>
+          {{/c.body}}
+        {{/t.content}}
+      {{/data-table}}
+    {{/if}}
+  </div>
+  <div class="col s12 m4 l2 option-panel">
+    <h4>Parameters</h4>
+    <div class="options">
+      <div class="row">
+        <div class="col s6">Sorting</div>
+        <div class="col s6">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
+      </div>
+      <div class="row">
+        <div class="col s6">Page number</div>
+        <div class="col s6">{{page}}</div>
+      </div>
+      <div class="row">
+        <div class="col s6">Page size</div>
+        <div class="col s6">{{size}}</div>
+      </div>
+      <div class="row">
+        <div class="col s6">Search</div>
+        <div class="col s6">
+          {{input id="enableFilter" type="checkbox" class="materialize-selectable-item-input filled-in" checked=enableFilter}}
+          <label for="enableFilter"></label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">Line numbers</div>
+        <div class="col s6">
+          {{input id="enableLineNumbers" type="checkbox" class="materialize-selectable-item-input filled-in" checked=enableLineNumbers}}
+          <label for="enableLineNumbers"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>Coming soon</p>
+<h4>Code sample</h4>
+<div class="row code-sample">
+  {{#if enableFilter}}
+    {{code-snippet name="advanced-data-table-with-filter.hbs"}}
+  {{else}}
+    {{code-snippet name="advanced-data-table-without-filter.hbs"}}
+  {{/if}}
+</div>
