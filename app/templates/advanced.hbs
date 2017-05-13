@@ -3,6 +3,15 @@
     <h4>My advanced books table</h4>
     {{#if enableFilter}}
       {{#data-table content=model sort=sort page=page size=size filter=filter lineNumbers=enableLineNumbers as |t|}}
+        {{#t.menu as |menu|}}
+          {{#menu.general}}
+            <a {{action 'export'}}>Export</a>
+            <a {{action 'print'}}>Print</a>
+          {{/menu.general}}
+          {{#menu.selected as |selection datatable|}}
+            <a {{action 'delete' selection datatable}}>Delete</a>
+          {{/menu.selected}}
+        {{/t.menu}}
         {{#t.content as |c|}}
           {{#c.header}}
             {{th-sortable field='title' currentSorting=sort label='Title'}}
