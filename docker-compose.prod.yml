@@ -1,0 +1,50 @@
+version: '2'
+services:
+  frontend:
+    restart: always
+    image: semtech/ember-proxy-service:1.1.0
+    volumes:
+      - ./dist:/app
+    links:
+      - identifier:backend
+    environment:
+      VIRTUAL_HOST: "ember-data-table.semte.ch"
+      LETSENCRYPT_HOST: "ember-data-table.semte.ch"
+      LETSENCRYPT_EMAIL: "erika.pauwels@gmail.com"
+      STATIC_FOLDERS_REGEX: "^/(assets|font|fonts)/"
+    networks:
+      - proxy
+      - default
+  identifier:
+    restart: always
+    image: semtech/mu-identifier:1.2.0
+    links:
+      - dispatcher:dispatcher
+  dispatcher:
+    restart: always
+    image: semtech/mu-dispatcher:1.1.0
+    links:
+      - books:books
+    volumes:
+      - ./backend/dispatcher:/config
+  books:
+    restart: always
+    image: erikap/books-service:ember-data-table-example
+    links:
+      - db:database
+  migrations:
+    restart: always
+    image: semtech/mu-migrations-service:0.2.0
+    links:
+      - db:database
+    volumes:
+      - ./backend/migrations:/data/migrations
+  db:
+    restart: always
+    image: tenforce/virtuoso:1.1.0-virtuoso7.2.0
+    environment:
+      SPARQL_UPDATE: "true"
+networks:
+  proxy:
+    external:
+      name: letsencrypt_default
