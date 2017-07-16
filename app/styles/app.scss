@@ -1,33 +1,50 @@
-$primary-color:  #e53935; /* red-darken-1 */
-$secondary-color: #e53935; /* red-darken-1 */
+$primary: "red";
+$accent: "light-blue";
 
-@import "ember-data-table";
+@import 'ember-paper';
+@import 'ember-data-table';
 
-.brand-logo {
-  font-weight: 500;
-  text-transform: uppercase;
+main {
+  margin: 25px;
 }
 
-nav ul a.no-hover:hover {
-  background-color: transparent;
+.md-toolbar-tools {
+  text-align: center;
+
+  h1 {
+    font-size: 2.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
 }
 
-.main-content {
-  margin-top: 25px;
-}
-
-.col.table-example {
+.table-example {
   border-right: 2px solid #e53935;
+  padding-right: 20px;
+}
+
+.option-panel {
   padding-left: 20px;
-}
 
-.option-panel .options {
-  padding-top: 10px;
-}
+  .option {
+    min-height: 50px;
 
+    .option-key {
+      min-width: 110px;
+    }
 
-.code-sample pre {
-  border: 1px solid #ef9a9a;
-  padding: 20px;
-  background: #ffebee;
+    .option-value {
+      md-input-container {
+        margin: 0;
+
+        .md-errors-spacer {
+          min-height: 0;
+        }
+      }
+
+      md-checkbox {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

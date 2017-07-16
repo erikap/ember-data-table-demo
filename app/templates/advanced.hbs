@@ -1,15 +1,15 @@
-<div class="row main-content">
-  <div class="col s12 m8 l10 table-example">
-    <h4>My advanced books table</h4>
+<div class="layout-row">
+  <div class="flex table-example">
+    <h2>My advanced books table</h2>
     {{#if enableFilter}}
-      {{#data-table content=model sort=sort page=page size=size filter=filter lineNumbers=enableLineNumbers as |t|}}
+      {{#data-table content=model sort=sort page=page size=size filter=filter enableSizes=enableSizes lineNumbers=enableLineNumbers as |t|}}
         {{#t.menu as |menu|}}
           {{#menu.general}}
-            <a {{action 'export'}}>Export</a>
-            <a {{action 'print'}}>Print</a>
+            {{#paper-button onClick=(action "export") accent=true noInk=true}}Export{{/paper-button}}
+            {{#paper-button onClick=(action "print") accent=true noInk=true}}Print{{/paper-button}}
           {{/menu.general}}
           {{#menu.selected as |selection datatable|}}
-            <a {{action 'delete' selection datatable}}>Delete</a>
+            {{#paper-button onClick=(action "delete" selection datatable) accent=true noInk=true}}Delete{{/paper-button}}
           {{/menu.selected}}
         {{/t.menu}}
         {{#t.content as |c|}}
@@ -34,7 +34,16 @@
         {{/t.content}}
       {{/data-table}}
     {{else}}
-      {{#data-table content=model sort=sort page=page size=size lineNumbers=enableLineNumbers as |t|}}
+      {{#data-table content=model sort=sort page=page size=size enableSizes=enableSizes lineNumbers=enableLineNumbers as |t|}}
+        {{#t.menu as |menu|}}
+          {{#menu.general}}
+            {{#paper-button onClick=(action "export") accent=true noInk=true}}Export{{/paper-button}}
+            {{#paper-button onClick=(action "print") accent=true noInk=true}}Print{{/paper-button}}
+          {{/menu.general}}
+          {{#menu.selected as |selection datatable|}}
+            {{#paper-button onClick=(action "delete" selection datatable) accent=true noInk=true}}Delete{{/paper-button}}
+          {{/menu.selected}}
+        {{/t.menu}}
         {{#t.content as |c|}}
           {{#c.header}}
             {{th-sortable field='title' currentSorting=sort label='Title'}}
@@ -47,7 +56,7 @@
           {{/c.header}}
           {{#c.body as |row|}}
             <td>{{row.title}}</td>
-            <td>{{map-by "name" row.authors}}</td>
+            <td>{{join ", " (map-by "name" row.authors)}}</td>
             <td><a href="https://www.google.be/#q=isbn:+{{row.isbn}}&*">{{row.isbn}}</a></td>
             <td>{{row.genre}}</td>
             <td>{{moment-format row.publicationDate 'MM/DD/YYYY'}}</td>
@@ -58,44 +67,44 @@
       {{/data-table}}
     {{/if}}
   </div>
-  <div class="col s12 m4 l2 option-panel">
-    <h4>Parameters</h4>
-    <div class="options">
-      <div class="row">
-        <div class="col s6">Sorting</div>
-        <div class="col s6">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
+  <div class="flex-30 option-panel">
+    <h2>Parameters</h2>
+    <div class="layout-column options">
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Sorting</div>
+        <div class="option-value">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
       </div>
-      <div class="row">
-        <div class="col s6">Page number</div>
-        <div class="col s6">{{page}}</div>
-      </div>
-      <div class="row">
-        <div class="col s6">Page size</div>
-        <div class="col s6">{{size}}</div>
-      </div>
-      <div class="row">
-        <div class="col s6">Search</div>
-        <div class="col s6">
-          {{input id="enableFilter" type="checkbox" class="materialize-selectable-item-input filled-in" checked=enableFilter}}
-          <label for="enableFilter"></label>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Page number</div>
+        <div class="option-value">
+          {{paper-input class="flex-30" value=page onChange=(action (mut page)) type="number" min="0"}}
         </div>
       </div>
-      <div class="row">
-        <div class="col s6">Line numbers</div>
-        <div class="col s6">
-          {{input id="enableLineNumbers" type="checkbox" class="materialize-selectable-item-input filled-in" checked=enableLineNumbers}}
-          <label for="enableLineNumbers"></label>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Page size</div>
+        <div class="option-value">
+          {{paper-input class="flex-30" value=size onChange=(action (mut size)) type="number" min="1"}}
         </div>
+      </div>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Search</div>
+        <div class="option-value">{{paper-checkbox value=enableFilter primary=true onChange=(action (mut enableFilter))}}</div>
+      </div>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Size options</div>
+        <div class="option-value">{{paper-checkbox value=enableSizes primary=true onChange=(action (mut enableSizes))}}</div>
+      </div>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Line numbers</div>
+        <div class="option-value">{{paper-checkbox value=enableLineNumbers primary=true onChange=(action (mut enableLineNumbers))}}</div>
       </div>
     </div>
   </div>
 </div>
 
-<h4>Code sample</h4>
-<div class="row code-sample">
-  {{#if enableFilter}}
-    {{code-snippet name="advanced-data-table-with-filter.hbs"}}
-  {{else}}
-    {{code-snippet name="advanced-data-table-without-filter.hbs"}}
-  {{/if}}
+<div>
+  <h2>Code sample</h2>
+  {{#highlight-code theme='tomorrow' type='handlebars'}}
+    {{code}}
+  {{/highlight-code}}
 </div>

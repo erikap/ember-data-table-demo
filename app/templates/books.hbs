@@ -1,43 +1,42 @@
-<div class="row main-content">
-  <div class="col s12 m8 l10 table-example">
-    <h4>My simple books table</h4>
+<div class="layout-row">
+  <div class="flex table-example">
+    <h2>My simple books table</h2>
     {{#if enableFilter}}
       {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page size=size filter=filter}}
     {{else}}
       {{data-table content=model fields="title isbn genre publicationDate language numberOfPages" sort=sort page=page size=size}}
     {{/if}}
   </div>
-  <div class="col s12 m4 l2 option-panel">
-    <h4>Parameters</h4>
-    <div class="options">
-      <div class="row">
-        <div class="col s6">Sorting</div>
-        <div class="col s6">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
+  <div class="flex-30 option-panel">
+    <h2>Parameters</h2>
+    <div class="layout-column options">
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Sorting</div>
+        <div class="option-value">{{#if sort}}{{sort}}{{else}}<i>null</i>{{/if}}</div>
       </div>
-      <div class="row">
-        <div class="col s6">Page number</div>
-        <div class="col s6">{{page}}</div>
-      </div>
-      <div class="row">
-        <div class="col s6">Page size</div>
-        <div class="col s6">{{size}}</div>
-      </div>
-      <div class="row">
-        <div class="col s6">Search</div>
-        <div class="col s6">
-          {{input id="enableFilter" type="checkbox" class="materialize-selectable-item-input filled-in" checked=enableFilter}}
-          <label for="enableFilter"></label>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Page number</div>
+        <div class="option-value">
+          {{paper-input class="flex-30" value=page onChange=(action (mut page)) type="number" min="0"}}
         </div>
+      </div>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Page size</div>
+        <div class="option-value">
+          {{paper-input class="flex-30" value=size onChange=(action (mut size)) type="number" min="1"}}
+        </div>
+      </div>
+      <div class="layout-row layout-align-start-center option">
+        <div class="option-key flex-none">Search</div>
+        <div class="option-value">{{paper-checkbox value=enableFilter primary=true onChange=(action (mut enableFilter))}}</div>
       </div>
     </div>
   </div>
 </div>
 
-<h4>Code sample</h4>
-<div class="row code-sample">
-  {{#if enableFilter}}
-    {{code-snippet name="simple-data-table-with-filter.hbs"}}
-  {{else}}
-    {{code-snippet name="simple-data-table-without-filter.hbs"}}
-  {{/if}}
+<div>
+  <h2>Code sample</h2>
+  {{#highlight-code theme='tomorrow' type='handlebars'}}
+    {{code}}
+  {{/highlight-code}}
 </div>

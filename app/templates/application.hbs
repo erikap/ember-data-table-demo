@@ -1,14 +1,24 @@
-<nav>
-  <div class="nav-wrapper">
-    <a href="https://github.com/mu-semtech/ember-data-table" class="brand-logo center">Ember Data Table demo</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li>{{link-to 'Simple example' 'books'}}</li>
-      <li>{{link-to 'Advanced example' 'advanced'}}</li>
-      <li><a href="https://github.com/mu-semtech/ember-data-table" class="no-hover">{{fa-icon "github" size=3}}</a></li>
-    </ul>
-  </div>
-</nav>
+{{#paper-toolbar as |toolbar|}}
+  {{#toolbar.tools}}
+    <h1 class="brand-logo">Ember Data Table demo</h1>
+    <span class="flex"></span>
+    {{#paper-menu as |menu|}}
+      {{#menu.trigger}}
+        {{#paper-button}}Examples {{paper-icon "expand more"}}{{/paper-button}}
+      {{/menu.trigger}}
+      {{#menu.content width=3 as |content|}}
+        {{#content.menu-item onClick="goToSimple"}}
+          <span>Simple example</span>
+        {{/content.menu-item}}
+        {{#content.menu-item onClick="goToAdvanced"}}
+          <span>Advanced example</span>
+        {{/content.menu-item}}
+      {{/menu.content}}
+    {{/paper-menu}}
+    <a href="https://github.com/mu-semtech/ember-data-table" class="no-hover">{{fa-icon "github" size=2}}</a>
+  {{/toolbar.tools}}
+{{/paper-toolbar}}
 
-<div class="container">
+<main>
   {{outlet}}
-</div>
+</main>
