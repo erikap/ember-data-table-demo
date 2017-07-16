@@ -4139,6 +4139,6 @@ catch(err) {
 });
 
 if (!runningTests) {
-  require("ember-data-table-demo/app")["default"].create({"name":"ember-data-table-demo","version":"0.0.0+da6b809f"});
+  require("ember-data-table-demo/app")["default"].create({"name":"ember-data-table-demo","version":"0.0.0+7fab1a63"});
 }
 //# sourceMappingURL=ember-data-table-demo.map
